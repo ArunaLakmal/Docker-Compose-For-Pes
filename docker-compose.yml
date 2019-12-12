@@ -1,0 +1,19 @@
+version: '3'
+services:
+  web:
+    image: "nginx:latest"
+    ports:
+      - "8081:80"
+    environment:
+      - NODE_ENV=dev
+    networks:
+      - frontend
+  mysql:
+    image: "redis:latest"
+    networks:
+      - backend
+
+networks:
+  frontend:
+  backend:
+   internal: true
