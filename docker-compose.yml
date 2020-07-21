@@ -4,12 +4,26 @@ services:
     image: "nginx:latest"
     ports:
       - "8081:80"
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: "us-east-1"
+        awslogs-group: "pes-logs"
+        awslogs-stream: "nginx-logs"
+        awslogs-create-group: "true"
     environment:
       - NODE_ENV=dev
     networks:
       - frontend
-  mysql:
+  redis:
     image: "redis:latest"
+    logging:
+      driver: "awslogs"
+      options:
+        awslogs-region: "us-east-1"
+        awslogs-group: "pes-logs"
+        awslogs-stream: "redis-logs"
+        awslogs-create-group: "true"
     networks:
       - backend
 
